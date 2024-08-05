@@ -100,17 +100,17 @@ Now, we take the **url** member within **asssets** json which is the valid URL u
 ## Programming for OTA updates in ESP-IDF
 1. Prepare HTTP client config
 
-![HTTTP Client](http-client.png)
+![HTTTP Client](images/http-client.png)
 
 2. Prepare HTTPS OTA conig 
 
-![HTTPS OTA conig](OTA-Client.png)
+![HTTPS OTA conig](images/OTA-Client.png)
 
-![Callback](Callback.png)
+![Callback](images/Callback.png)
 
 3. Start OTA process using esp_https_ota_begin()
 4. Perform OTA operation using esp_https_ota_perform()
-![OTA perform OTA](perform.png)
+![OTA perform OTA](images/perform.png)
 5. Finish the OTA operation
 6. Restart the device
 
