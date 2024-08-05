@@ -30,6 +30,7 @@
 #define USERNAME "USERNAME"
 #define PAT "PERSONAL_ACCESS_TOKEN"
 #define REPOSITORY_NAME "REPOSITORY_NAME"
+#define ASSET_ID 183937167
 
 #define EXAMPLE_ESP_WIFI_SSID "SSID"
 #define EXAMPLE_ESP_WIFI_PASS "PSWD"
@@ -181,7 +182,7 @@ void ota_performer()
     memset(ota_url, 0, 128);
 
     // Prepare URL for the asset formatted as: https://api.github.com/repos/<Username>/<Repository Name>/releases/assets/<Asset ID>
-    snprintf(ota_url, 128, "https://api.github.com/repos/%s/%s/releases/assets/183937167", USERNAME, REPOSITORY_NAME);
+    snprintf(ota_url, 128, "https://api.github.com/repos/%s/%s/releases/assets/%d", USERNAME, REPOSITORY_NAME, ASSET_ID);
     static esp_http_client_config_t ota_http_configurations = {
         .url = ota_url,
         .crt_bundle_attach = esp_crt_bundle_attach, // Attach certificate bundles provided by the IDF itself, no other certificates are required.
@@ -196,7 +197,8 @@ void ota_performer()
     ESP_LOGE(__FILE__, "Starting OTA updates");
     static esp_https_ota_config_t ota_config = {
         .http_config = &ota_http_configurations,
-        // HTTPS OTA initializes the http client, if call exits then it is called. Here when downloaing assets from github, following 3 additional headers have to be added in the request header
+        // HTTPS OTA initializes the http client, if call exits then it is called. Here when downloaing assets from github, following 3 additional headers have to be 
+        // added in the request header
         // 1. `Accept: application/octet-stream`
         // 2. "Authorization: Bearer <Personal Access Token>"
         // 3. "X-GitHub-Api-Version: 2022-11-28"
